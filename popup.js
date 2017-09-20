@@ -1,4 +1,5 @@
 getAllTabs();
+setActiveTab();
 
 /**
  * Gets all tabs in
@@ -9,12 +10,19 @@ function getAllTabs() {
         createList(tabs);
 
     });
+
+    setActiveTab();
 }
 
+/**
+ *
+ * @param ls
+ */
 
 function createList(ls) {
 
     var tabsList = groupUrls(ls);
+
 
     for (var key in tabsList) {
         var ul = document.createElement("ul");
@@ -40,6 +48,8 @@ function createList(ls) {
         document.getElementById("tabList").appendChild(ul);
     }
 
+
+
 }
 
 /**
@@ -54,7 +64,7 @@ function createList(ls) {
  */
 
 function groupUrls(tabs) {
-    domain_dict = {};
+    var domain_dict = {};
 
     for (var idx in tabs) {
         let url = new URL(tabs[idx].url);
@@ -87,4 +97,36 @@ function groupUrls(tabs) {
 function switchTabs(event) {
     console.log(event.target);
     chrome.tabs.update(parseInt(event.target.getAttribute("id")), {highlighted:true});
+
+
+
 }
+
+
+function setActiveTab() {
+    chrome.windows.getCurrent(function (window) {
+        chrome.tabs.query({
+                active: true,
+                windowId: window.id
+            },
+            function (tabs) {
+                document.getElementById("activeTab").innerHTML = tabs[0].title;
+            });
+    });
+
+
+}
+
+function getActiveTab() {
+    chrome.windows.getCurrent(function (window) {
+        chrome.tabs.query({
+                active: true,
+                windowId: window.id
+            },
+            function (tabs) {
+                console.log(tabs)
+                return tabs[0];
+            });
+    });
+}
+
