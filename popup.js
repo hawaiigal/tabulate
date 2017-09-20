@@ -32,13 +32,24 @@ function createList(ls) {
         var ul = document.createElement("ul");
         var textUl = document.createTextNode(key);
         ul.appendChild(textUl);
-
         ul.setAttribute("class", "domains");
 
         for (var idx in tabsList[key]) {
+
+            // Add li element under the top level ul
             var node = document.createElement("LI");
+            // Add the title of the tab to the text of the li
             var text = document.createTextNode(tabsList[key][idx].title);
+
+
+            var button = document.createElement("button");
+            button.innerHTML = "fuck";
+
+            button.setAttribute("class", "tabControls");
+
+            // Append text and div elements to node
             node.appendChild(text);
+            node.appendChild(button);
 
             // For use in switchTab
             node.setAttribute("id", tabsList[key][idx].id);

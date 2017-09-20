@@ -2,6 +2,11 @@
     font-size: 10pt;
 }
 
+.tabs:hover {
+    transition: .25s;
+    background-color: #d7ffd9;
+}
+
 .domains {
     font-size: 18pt;
 }
@@ -12,4 +17,12 @@
 
 #activeTab {
     text-align: center;
+}
+
+.tabControls {
+    display:none;
+}
+
+.tabControls:hover {
+    display: block;
 }
