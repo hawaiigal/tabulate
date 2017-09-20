@@ -19,8 +19,8 @@ function getAllTabs() {
 }
 
 /**
- *
- * @param ls
+ * Creates the tab list and adds them to popup.html
+ * @param ls    An array of Tab objects
  */
 
 function createList(ls) {
@@ -53,8 +53,6 @@ function createList(ls) {
 
         document.getElementById("tabList").appendChild(ul);
     }
-
-
 
 }
 
@@ -105,15 +103,14 @@ function switchTabs(event) {
     var targetId = parseInt(event.target.getAttribute("id"));
     var winId = parseInt(event.target.getAttribute("windowId"));
 
-
     chrome.windows.update(winId, {focused:true});
     chrome.tabs.update(targetId, {highlighted:true});
 
-
-
 }
 
-
+/**
+ * Sets the active tab element in popup.html
+ */
 function setActiveTab() {
     chrome.windows.getCurrent(function (window) {
         chrome.tabs.query({
@@ -125,16 +122,3 @@ function setActiveTab() {
             });
     });
 }
-
-function getActiveTab() {
-    chrome.windows.getCurrent(function (window) {
-        chrome.tabs.query({
-                active: true,
-                windowId: window.id
-            },
-            function (tabs) {
-                return tabs[0];
-            });
-    });
-}
-
