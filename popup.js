@@ -1,5 +1,9 @@
+
+
 getAllTabs();
 setActiveTab();
+
+
 
 /**
  * Gets all tabs in
@@ -36,7 +40,10 @@ function createList(ls) {
             var text = document.createTextNode(tabsList[key][idx].title);
             node.appendChild(text);
 
+            // For use in switchTab
             node.setAttribute("id", tabsList[key][idx].id);
+            node.setAttribute("windowId", tabsList[key][idx].windowId);
+
             node.setAttribute("class", "tabs");
 
             node.addEventListener("click", switchTabs);
@@ -44,7 +51,6 @@ function createList(ls) {
             ul.appendChild(node);
         }
 
-        console.log(ul);
         document.getElementById("tabList").appendChild(ul);
     }
 
@@ -96,7 +102,12 @@ function groupUrls(tabs) {
  */
 function switchTabs(event) {
     console.log(event.target);
-    chrome.tabs.update(parseInt(event.target.getAttribute("id")), {highlighted:true});
+    var targetId = parseInt(event.target.getAttribute("id"));
+    var winId = parseInt(event.target.getAttribute("windowId"));
+
+
+    chrome.windows.update(winId, {focused:true});
+    chrome.tabs.update(targetId, {highlighted:true});
 
 
 
@@ -113,8 +124,6 @@ function setActiveTab() {
                 document.getElementById("activeTab").innerHTML = tabs[0].title;
             });
     });
-
-
 }
 
 function getActiveTab() {
@@ -124,7 +133,6 @@ function getActiveTab() {
                 windowId: window.id
             },
             function (tabs) {
-                console.log(tabs)
                 return tabs[0];
             });
     });
