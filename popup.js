@@ -10,9 +10,7 @@ setActiveTab();
  */
 function getAllTabs() {
     chrome.tabs.query({}, function(tabs) {
-        console.log(tabs);
         createList(tabs);
-
     });
 
     setActiveTab();
@@ -29,40 +27,49 @@ function createList(ls) {
 
 
     for (var key in tabsList) {
-        var ul = document.createElement("ul");
-        var textUl = document.createTextNode(key);
-        ul.appendChild(textUl);
-        ul.setAttribute("class", "domains");
+
+        // Create a div that is the section header for each domain
+        var div = document.createElement("div");
+        div.innerHTML = key;
+        div.setAttribute("class", "domains");
 
         for (var idx in tabsList[key]) {
 
-            // Add li element under the top level ul
-            var node = document.createElement("LI");
-            // Add the title of the tab to the text of the li
-            var text = document.createTextNode(tabsList[key][idx].title);
+            // Add p element under the top level div
+            var node = document.createElement("p");
 
+            // Add the title of the tab to the text of the p
+            node.innerHTML = tabsList[key][idx].title;
 
-            var button = document.createElement("button");
-            button.innerHTML = "fuck";
-
-            button.setAttribute("class", "tabControls");
-
-            // Append text and div elements to node
-            node.appendChild(text);
-            node.appendChild(button);
-
-            // For use in switchTab
-            node.setAttribute("id", tabsList[key][idx].id);
+            // Set attributes for CSS and switching and closing tabs
+            node.setAttribute("tabid", tabsList[key][idx].id);
             node.setAttribute("windowId", tabsList[key][idx].windowId);
-
             node.setAttribute("class", "tabs");
 
+            // Call switchTabs when clicked
             node.addEventListener("click", switchTabs);
 
-            ul.appendChild(node);
+            div.appendChild(node);
+
+
+
+            // Create a fake button in a span element
+            var fakeButton = document.createElement("span");
+            fakeButton.innerHTML = "x";
+
+            // Set attributes for CSS and closing a tab
+            fakeButton.setAttribute("class", "closeTab");
+            fakeButton.setAttribute("tabid", tabsList[key][idx].id);
+
+            // Call closeTabs() when clicked
+            fakeButton.addEventListener("click", closeTabs);
+
+            div.appendChild(fakeButton);
         }
 
-        document.getElementById("tabList").appendChild(ul);
+
+
+        document.getElementById("tabList").appendChild(div);
     }
 
 }
@@ -110,19 +117,49 @@ function groupUrls(tabs) {
  * @param event event object representing the tab desired
  */
 function switchTabs(event) {
+    event.preventDefault();
     console.log(event.target);
-    var targetId = parseInt(event.target.getAttribute("id"));
+
+    var targetId = parseInt(event.target.getAttribute("tabid"));
     var winId = parseInt(event.target.getAttribute("windowId"));
 
+    // Bring the selected window into focus
     chrome.windows.update(winId, {focused:true});
+
+    // Switch to the selected tab
     chrome.tabs.update(targetId, {highlighted:true});
 
 }
 
 /**
+ * Closes the corresponding tab to the closetab button
+ * @param event
+ */
+function closeTabs(event) {
+    event.preventDefault();
+    var targetId = parseInt(event.target.getAttribute("tabid"));
+
+    // Get the tab corresponding to this close tab button
+    // the search query resolves to '.tabs[tabid="<targetId>"]', e.g. '.tabs[tabid="12"]'
+    var removableHtml = document.querySelector('.tabs[tabid="' + targetId + '"]');
+
+    // remove the html for the tab just closed
+    removableHtml.parentNode.removeChild(removableHtml);
+
+    // Remove the close tab button from html
+    event.target.parentNode.remove(event.target);
+
+    // Close the actual tab
+    chrome.tabs.remove(targetId);
+}
+
+
+/**
  * Sets the active tab element in popup.html
  */
 function setActiveTab() {
+
+    // Get current window, then get the active tab inside of it
     chrome.windows.getCurrent(function (window) {
         chrome.tabs.query({
                 active: true,

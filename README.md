@@ -9,3 +9,4 @@ A chrome extension to tabulate tabs for those of us that have a tab problem.
 [ ] Add search function for tabs
 [ ] Add ability to close tabs based on filters
 [x] Switch to tabs on other windows if possible
+[ ] Add keyboard shortcut to open popup
