@@ -3,6 +3,7 @@
 A chrome extension to tabulate tabs for those of us that have a tab problem.
 
 ### TODO:
+
 -[x] Add ability to close tabs from popup
 -[ ] Add ability to bring tab to current window if possible
 -[ ] Add better CSS styling to the popup
