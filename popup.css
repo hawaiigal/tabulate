@@ -1,6 +1,40 @@
 .tabs {
     font-size: 10pt;
+    width: 90%;
+    display: inline-block;
+/*    margin-top: 5px;
+    margin-bottom: 5px;*/
+
 }
+
+.tabs:hover {
+    transition: .5s;
+    background-color: #d7ffd9;
+    cursor: pointer;
+    border-radius: 20px;
+
+}
+
+.closeTab {
+    border-radius: 10px;
+    background: white;
+    width: 10%;
+    height: 1.25em;
+    float: right;
+    color: red;
+    text-align: center;
+    display: inline-block;
+    transition: all .5s;
+    margin-top: 6px;
+
+}
+
+.closeTab:hover {
+    color: white;
+    background-color: red;
+}
+
+
 
 .domains {
     font-size: 18pt;
@@ -8,8 +42,19 @@
 
 #header {
     font-size: 20pt;
+    text-align: center;
 }
 
 #activeTab {
     text-align: center;
+}
+
+.tabControls {
+    float: right;
+    display: none;
+}
+
+
+body {
+
 }
