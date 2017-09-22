@@ -11,4 +11,4 @@ A chrome extension to tabulate tabs for those of us that have a tab problem.
 - [ ] Add ability to close tabs based on filters
 - [x] Switch to tabs on other windows if possible
 - [ ] Add keyboard shortcut to open popup
-- [ ] Remove domain div when there are no children left
+- [x] Remove domain div when there are no children left
