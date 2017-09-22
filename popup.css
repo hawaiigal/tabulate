@@ -19,13 +19,12 @@
     border-radius: 10px;
     background: white;
     width: 10%;
-    height: 1.25em;
+    height: 1em;
     float: right;
     color: red;
     text-align: center;
     display: inline-block;
     transition: all .5s;
-    margin-top: 6px;
 
 }
 
