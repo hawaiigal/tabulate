@@ -11,7 +11,7 @@ setActiveTab();
 function getAllTabs() {
     chrome.tabs.query({}, function(tabs) {
         createList(tabs);
-		console.log(tabs);
+        console.log(tabs);
     });
 
     setActiveTab();
@@ -23,20 +23,15 @@ function getAllTabs() {
  */
 
 function createList(ls) {
-
     var tabsList = groupUrls(ls);
 
     for (var key in tabsList) {
-		
         // Create a div that is the section header for each domain
         var div = document.createElement("div");
-        div.innerHTML = key;
+        div.innerHTML = '<p class="domain">' + key + '</p>';
         div.setAttribute("class", "domains");
 
         for (var idx in tabsList[key]) {
-			
-			
-
             // Add p element under the top level div
             var node = document.createElement("p");
 
@@ -53,8 +48,6 @@ function createList(ls) {
 
             div.appendChild(node);
 
-
-
             // Create a fake button in a span element
             var fakeButton = document.createElement("span");
             fakeButton.innerHTML = "x";
@@ -67,14 +60,10 @@ function createList(ls) {
             fakeButton.addEventListener("click", closeTabs);
 
             div.appendChild(fakeButton);
-			
         }
-
-
 
         document.getElementById("tabList").appendChild(div);
     }
-
 }
 
 /**
@@ -90,30 +79,28 @@ function createList(ls) {
 
 function groupUrls(tabs) {
     var domain_dict = {};
-	
+
     for (var idx in tabs) {
-		
-		
         let url = new URL(tabs[idx].url);
-		
-		if (url.href.includes("chrome://")) {
-			
-			if (domain_dict["chrome://"] === undefined) {
-				domain_dict["chrome://"] = [tabs[idx]];
-			} else {
-				domain_dict["chrome://"].push(tabs[idx]);
-			}
-		} else if (domain_dict[url.hostname] === undefined) {
-            
-			domain_dict[url.hostname] = [tabs[idx]];
-            
+
+        if (url.href.includes("chrome://")) {
+
+            if (domain_dict["chrome://"] === undefined) {
+                domain_dict["chrome://"] = [tabs[idx]];
+            } else {
+                domain_dict["chrome://"].push(tabs[idx]);
+            }
+        } else if (domain_dict[url.hostname] === undefined) {
+
+            domain_dict[url.hostname] = [tabs[idx]];
+
         } else {
 
-			domain_dict[url.hostname].push(tabs[idx]);
+            domain_dict[url.hostname].push(tabs[idx]);
 
         }
     }
-	
+
 
     return domain_dict;
 }
@@ -124,7 +111,7 @@ function groupUrls(tabs) {
  */
 function switchTabs(event) {
     event.preventDefault();
-	
+
     var targetId = parseInt(event.target.getAttribute("tabid"));
     var winId = parseInt(event.target.getAttribute("windowId"));
 
@@ -133,7 +120,6 @@ function switchTabs(event) {
 
     // Switch to the selected tab
     chrome.tabs.update(targetId, {highlighted:true});
-
 }
 
 
@@ -144,32 +130,30 @@ function switchTabs(event) {
 function closeTabs(event) {
     event.preventDefault();
     var targetId = parseInt(event.target.getAttribute("tabid"));
-	
-	
-	console.log(event.target.parentNode.childNodes);
-	if (event.target.parentNode.childNodes.length === 3) {
-		
-		event.target.parentNode.remove();
+  
+    console.log(event.target.parentNode.childNodes);
+    if (event.target.parentNode.childNodes.length === 3) {
+        event.target.parentNode.remove();
         // Close the actual tab
         chrome.tabs.remove(targetId);
-	} else {
-		// Get the tab corresponding to this close tab button
-		// the search query resolves to '.tabs[tabid="<targetId>"]', e.g. '.tabs[tabid="12"]'
-		var removableHtml = document.querySelector('.tabs[tabid="' + targetId + '"]');
-		
+    } else {
+        // Get the tab corresponding to this close tab button
+        // the search query resolves to '.tabs[tabid="<targetId>"]', e.g. '.tabs[tabid="12"]'
+        var removableHtml = document.querySelector('.tabs[tabid="' + targetId + '"]');
 
-		
-		// remove the html for the tab just closed
-		removableHtml.parentNode.removeChild(removableHtml);
-		
-		
-		// Remove the close tab button from html
-		event.target.parentNode.removeChild(event.target);
 
-		// Close the actual tab
-		chrome.tabs.remove(targetId);
-	}
-	
+
+        // remove the html for the tab just closed
+        removableHtml.parentNode.removeChild(removableHtml);
+
+
+        // Remove the close tab button from html
+        event.target.parentNode.removeChild(event.target);
+
+        // Close the actual tab
+        chrome.tabs.remove(targetId);
+    }
+
 }
 
 
@@ -177,15 +161,14 @@ function closeTabs(event) {
  * Sets the active tab element in popup.html
  */
 function setActiveTab() {
-
     // Get current window, then get the active tab inside of it
     chrome.windows.getCurrent(function (window) {
         chrome.tabs.query({
-                active: true,
-                windowId: window.id
-            },
-            function (tabs) {
-                document.getElementById("activeTab").innerHTML = tabs[0].title;
-            });
+            active: true,
+            windowId: window.id
+        },
+        function (tabs) {
+            document.getElementById("activeTab").innerHTML = tabs[0].title;
+        });
     });
 }
