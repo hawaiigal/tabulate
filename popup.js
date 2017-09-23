@@ -150,6 +150,8 @@ function closeTabs(event) {
 	if (event.target.parentNode.childNodes.length === 3) {
 		
 		event.target.parentNode.remove();
+        // Close the actual tab
+        chrome.tabs.remove(targetId);
 	} else {
 		// Get the tab corresponding to this close tab button
 		// the search query resolves to '.tabs[tabid="<targetId>"]', e.g. '.tabs[tabid="12"]'

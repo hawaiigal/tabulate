@@ -10,7 +10,9 @@
 .tabs:hover {
     transition: .5s;
     background-color: #d7ffd9;
+    /*
     cursor: pointer;
+    */
     border-radius: 20px;
 
 }
@@ -25,12 +27,13 @@
     text-align: center;
     display: inline-block;
     transition: all .5s;
-
+    cursor: pointer;
 }
 
 .closeTab:hover {
     color: white;
     background-color: red;
+
 }
 
 
