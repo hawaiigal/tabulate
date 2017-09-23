@@ -130,6 +130,7 @@ function switchTabs(event) {
 function closeTabs(event) {
     event.preventDefault();
     var targetId = parseInt(event.target.getAttribute("tabid"));
+  
     console.log(event.target.parentNode.childNodes);
     if (event.target.parentNode.childNodes.length === 3) {
         event.target.parentNode.remove();
