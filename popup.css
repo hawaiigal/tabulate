@@ -1,59 +1,65 @@
-.tabs {
-    font-size: 10pt;
-    width: 90%;
-    display: inline-block;
-/*    margin-top: 5px;
-    margin-bottom: 5px;*/
-
+body, h1, h2, h3, h4, h5, h6, p, a, i, b, div, hr, ul, li {
+    margin: 0;
+    padding: 0;
 }
 
-.tabs:hover {
-    transition: .5s;
-    background-color: #d7ffd9;
-    cursor: pointer;
-    border-radius: 20px;
-
+body {
+    padding: 8px;
 }
 
-.closeTab {
-    border-radius: 10px;
-    background: white;
-    width: 10%;
-    height: 1em;
-    float: right;
-    color: red;
-    text-align: center;
-    display: inline-block;
-    transition: all .5s;
-
-}
-
-.closeTab:hover {
-    color: white;
-    background-color: red;
-}
-
-
-
-.domains {
-    font-size: 18pt;
+body.dark {
+    background: #2b2b2b;
+    color: #f8f8f2;
 }
 
 #header {
-    font-size: 20pt;
+    font-size: 26px;
+    white-space: nowrap;
     text-align: center;
 }
 
 #activeTab {
+    font-size: 18px;
     text-align: center;
+    overflow: hidden;
+    height: 1.25em;
 }
 
-.tabControls {
+#tabList {
+    margin-top: 20px;
+}
+
+.domain {
+    font-size: 20px;
+}
+
+.tabs {
+    display: inline-block;
+    font-size: 12px;
+    width: 90%;
+    overflow: hidden;
+    line-height: 12px;
+}
+
+.closeTab {
+    margin-top: -2px;
+
+    display: inline-block;
     float: right;
-    display: none;
+    color: #999998;
+    height: 16px;
+    width: 16px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 16px;
+    transition: all .15s;
 }
 
+.closeTab:hover {
+    font-size: 16px;
+    color: #ee0000;
+}
 
-body {
-
+.tabs, .closeTab {
+    cursor: pointer;
 }
