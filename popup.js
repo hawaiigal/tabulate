@@ -15,6 +15,8 @@ function getAllTabs() {
     });
 
     setActiveTab();
+
+
 }
 
 /**
@@ -49,17 +51,17 @@ function createList(ls) {
             div.appendChild(node);
 
             // Create a fake button in a span element
-            var fakeButton = document.createElement("span");
-            fakeButton.innerHTML = "x";
+            var closeButton = document.createElement("span");
+            closeButton.innerHTML = "x";
 
             // Set attributes for CSS and closing a tab
-            fakeButton.setAttribute("class", "closeTab");
-            fakeButton.setAttribute("tabid", tabsList[key][idx].id);
+            closeButton.setAttribute("class", "closeTab");
+            closeButton.setAttribute("tabid", tabsList[key][idx].id);
 
             // Call closeTabs() when clicked
-            fakeButton.addEventListener("click", closeTabs);
+            closeButton.addEventListener("click", closeTabs);
 
-            div.appendChild(fakeButton);
+            div.appendChild(closeButton);
         }
 
         document.getElementById("tabList").appendChild(div);

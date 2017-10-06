@@ -40,6 +40,7 @@ body.dark {
     width: 90%;
     overflow: hidden;
     line-height: 12px;
+    margin-bottom: 3px;
 }
 
 .closeTab {
@@ -63,4 +64,8 @@ body.dark {
 
 .tabs, .closeTab {
     cursor: pointer;
+}
+
+.search {
+
 }
