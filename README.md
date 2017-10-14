@@ -12,3 +12,4 @@ A chrome extension to tabulate tabs for those of us that have a tab problem.
 - [x] Switch to tabs on other windows if possible
 - [ ] Add keyboard shortcut to open popup
 - [x] Remove domain div when there are no children left
+- [ ] Add functionality to show duplicate tabs

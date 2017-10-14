@@ -43,3 +43,32 @@ function search(event) {
 
     })
 }
+
+/**
+ * Converts a string representation of a float to an actual float.
+ * Assumes valid input.  We can catch invalid input by ensuring that
+ * there are no other characters other than digits and a single decimal point.
+ * @param str   The string to be converted
+ */
+function weeblyFloat(str) {
+    // Remove all whitespace and then split by decimal point
+    var arr = str.replace(/\s/g, "").split(".");
+
+    var integers = arr[0];
+    var decimals = arr[1];
+
+    var intNumber = 0;
+    var decNumber = 0;
+
+    for (var intIdx = 0; intIdx < integers.length; intIdx += 1) {
+        intNumber += integers.charAt(intIdx) * Math.pow(10, integers.length - intIdx - 1);
+    }
+
+
+    for (var decIdx = 0; decIdx < decimals.length; decIdx += 1) {
+        decNumber += decimals.charAt(decIdx) * Math.pow(10, 0 - decIdx - 1);
+    }
+
+
+    return intNumber + decNumber;
+}
