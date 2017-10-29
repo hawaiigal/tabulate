@@ -2,8 +2,14 @@
 
 A chrome extension to tabulate tabs for those of us that have a tab problem.
 
-### TODO:
+###Supported features:
+- Jump to tabs between windows and workspaces
+- Close tabs between windows and workspaces
+- Group tabs by domain
 
+### TODO (Not in any order):
+
+- [ ] Close all tabs in a domain
 - [x] Add ability to close tabs from popup
 - [ ] Add ability to bring tab to current window if possible
 - [ ] Add better CSS styling to the popup
