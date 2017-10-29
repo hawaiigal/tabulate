@@ -1,5 +1,3 @@
-workspace.xml
-tasks.xml
-.idea/libraries
+.idea/
 *.pem
 *.crx
