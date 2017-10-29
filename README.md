@@ -7,7 +7,8 @@ A chrome extension to tabulate tabs for those of us that have a tab problem.
 - [x] Add ability to close tabs from popup
 - [ ] Add ability to bring tab to current window if possible
 - [ ] Add better CSS styling to the popup
-- [ ] Add search function for tabs
+- [x] Add search function for tabs
+- [ ] Fix Search CSS so that it appears
 - [ ] Add ability to close tabs based on filters
 - [x] Switch to tabs on other windows if possible
 - [ ] Add keyboard shortcut to open popup
