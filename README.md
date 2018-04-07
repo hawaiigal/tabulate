@@ -2,7 +2,7 @@
 
 A chrome extension to tabulate tabs for those of us that have a tab problem.
 
-###Supported features:
+### Supported features:
 - Jump to tabs between windows and workspaces
 - Close tabs between windows and workspaces
 - Group tabs by domain
